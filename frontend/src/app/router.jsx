@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Navigate to="/passenger/home" replace />,
     // passenger lng muna
-    // gagawa ng routeRedirect.tsx para sa user login handling (passenger or driver)
+    // gagawa ng routeRedirect.jsx para sa user login handling (passenger or driver)
   },
   {
     path: "/passenger",
