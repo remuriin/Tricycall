@@ -25,7 +25,10 @@ async function main() {
     const chunks = chunkMarkdownFile(join(DOCS_DIR, file), file);
     console.log(`  ${file} -> ${chunks.length} chunks`);
 
-    const vectors = await embedBatch(chunks.map((c) => c.content), "RETRIEVAL_DOCUMENT");
+    const vectors = await embedBatch(
+      chunks.map((c) => `${c.heading}\n${c.content}`),
+      "RETRIEVAL_DOCUMENT"
+    );
     const embedded: EmbeddedChunk[] = chunks.map((c, i) => ({ ...c, embedding: vectors[i] }));
 
     await replaceFileChunks(file, embedded);
