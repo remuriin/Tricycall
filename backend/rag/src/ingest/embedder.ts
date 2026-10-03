@@ -3,32 +3,43 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const EMBED_MODEL = "gemini-embedding-001";
-const DIMENSIONS = 768; // matches the pgvector column width
+const DIMENSIONS = 768; // must match VECTOR(768) in db/client.ts
+const BATCH_SIZE = 50; // conservative; check the embeddings docs for the real max
+const DELAY_MS = 1000; // pause between batches to respect free-tier RPM
 
 export type EmbedTaskType = "RETRIEVAL_DOCUMENT" | "RETRIEVAL_QUERY";
 
 export async function embedText(text: string, taskType: EmbedTaskType): Promise<number[]> {
-  const result = await ai.models.embedContent({
-    model: EMBED_MODEL,
-    contents: text,
-    config: {
-      taskType,
-      outputDimensionality: DIMENSIONS,
-    },
-  });
-
-  const raw = result.embeddings![0].values!;
-  return DIMENSIONS === 3072 ? raw : l2Normalize(raw);
+  const [vector] = await embedBatch([text], taskType);
+  return vector;
 }
 
 export async function embedBatch(texts: string[], taskType: EmbedTaskType): Promise<number[][]> {
-  // gemini-embedding-001 processes one request at a time in the public API;
-  // run sequentially with a small delay to stay under free-tier RPM.
   const out: number[][] = [];
-  for (const text of texts) {
-    out.push(await embedText(text, taskType));
-    await new Promise((r) => setTimeout(r, 250));
+
+  for (let i = 0; i < texts.length; i += BATCH_SIZE) {
+    const slice = texts.slice(i, i + BATCH_SIZE);
+
+    const result = await ai.models.embedContent({
+      model: EMBED_MODEL,
+      contents: slice,
+      config: { taskType, outputDimensionality: DIMENSIONS },
+    });
+
+    const vectors = result.embeddings ?? [];
+    if (vectors.length !== slice.length) {
+      throw new Error(`Expected ${slice.length} embeddings, got ${vectors.length}`);
+    }
+
+    for (const e of vectors) {
+      out.push(l2Normalize(e.values!));
+    }
+
+    if (i + BATCH_SIZE < texts.length) {
+      await new Promise((r) => setTimeout(r, DELAY_MS));
+    }
   }
+
   return out;
 }
 
