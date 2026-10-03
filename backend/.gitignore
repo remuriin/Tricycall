@@ -22,3 +22,6 @@ serviceAccountKey.json
 # General dependencies and logs
 node_modules/
 *.log
+.env
+*.env
+**/.env
