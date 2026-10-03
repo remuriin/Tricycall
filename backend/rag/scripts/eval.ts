@@ -1,0 +1,161 @@
+import "dotenv/config";
+import { retrieveRelevantChunks } from "../src/retrieve/search.js";
+import { generateAnswer } from "../src/generate/answer.js";
+import { pool } from "../src/db/client.js";
+
+interface TestCase {
+  id: number;
+  tier: string;
+  question: string;
+  expectedSource?: string; // omit for questions that should be refused
+}
+
+const testCases: TestCase[] = [
+  // Tier 1 — direct lookups
+  { id: 1, tier: "direct", question: "What is the minimum fare?", expectedSource: "fares.md" },
+  { id: 2, tier: "direct", question: "How much is the cancellation fee?", expectedSource: "cancellations.md" },
+  { id: 3, tier: "direct", question: "What documents do I need to become a driver?", expectedSource: "driver-verification.md" },
+  { id: 4, tier: "direct", question: "What does the SOS button do?", expectedSource: "safety.md" },
+  { id: 5, tier: "direct", question: "How long does driver verification take?", expectedSource: "driver-verification.md" },
+  { id: 6, tier: "direct", question: "What discount do senior citizens get?", expectedSource: "fares.md" },
+  { id: 7, tier: "direct", question: "Can I pay with GCash?", expectedSource: "fares.md" },
+  { id: 8, tier: "direct", question: "What happens if my driver cancels?", expectedSource: "cancellations.md" },
+
+  // Tier 2 — paraphrased / indirect lookups
+  { id: 9, tier: "paraphrased", question: "why was my fare higher than i expected", expectedSource: "fares.md" },
+  { id: 10, tier: "paraphrased", question: "my driver never showed up, do i still get charged", expectedSource: "cancellations.md" },
+  { id: 11, tier: "paraphrased", question: "i got rejected, why", expectedSource: "driver-verification.md" },
+  { id: 12, tier: "paraphrased", question: "is it safe to ride alone at night", expectedSource: "safety.md" },
+  { id: 13, tier: "paraphrased", question: "how do i get my license checked again", expectedSource: "driver-verification.md" },
+  { id: 14, tier: "paraphrased", question: "i think i got overcharged", expectedSource: "fares.md" },
+
+  // Tier 3 — cross-document (listing one plausible source; judge the actual answer, not just the match)
+  { id: 15, tier: "cross-document", question: "i want to cancel because i feel unsafe, do i get charged", expectedSource: "cancellations.md" },
+  { id: 16, tier: "cross-document", question: "can a driver operate in a different city than where they signed up", expectedSource: "driver-verification.md" },
+  { id: 17, tier: "cross-document", question: "what happens to my fare if i report a safety incident mid-trip", expectedSource: "safety.md" },
+
+  // Tier 4 — out-of-scope, should be refused (no expectedSource)
+  { id: 18, tier: "refusal", question: "who is the CEO of Tricycall" },
+  { id: 19, tier: "refusal", question: "what's the weather like today" },
+  { id: 20, tier: "refusal", question: "how do I cancel my Grab ride" },
+  { id: 21, tier: "refusal", question: "what's the capital of the Philippines" },
+  { id: 22, tier: "refusal", question: "can I bring a pet on the tricycle" },
+  { id: 23, tier: "refusal", question: "does Tricycall operate in Cebu" },
+];
+
+const DELAY_MS = 3000; // pause between questions, free-tier RPM safety margin
+const MAX_RETRIES = 5; // retry attempts on transient errors (503/429) before giving up on a question
+const RETRY_DELAY_MS = 10000; // wait between retry attempts
+
+async function withRetry<T>(fn: () => Promise<T>, label: string, attemptsLeft = MAX_RETRIES): Promise<T> {
+  try {
+    return await fn();
+  } catch (err: any) {
+    const status = err?.status ?? err?.code;
+    const retryable = status === 503 || status === 429;
+
+    if (retryable && attemptsLeft > 0) {
+      console.log(
+        `  [${label}] hit ${status} (high demand / rate limit). Retrying in ${RETRY_DELAY_MS / 1000}s... (${attemptsLeft} attempt(s) left)`
+      );
+      await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
+      return withRetry(fn, label, attemptsLeft - 1);
+    }
+
+    // Not retryable, or out of attempts — let it bubble up to the per-question catch
+    throw err;
+  }
+}
+
+async function main() {
+  const results: {
+    id: number;
+    tier: string;
+    question: string;
+    expectedSource: string;
+    topScore: string;
+    gotSources: string;
+    answer: string;
+  }[] = [];
+
+  for (const tc of testCases) {
+    console.log(`\n[${tc.id}/23] (${tc.tier}) ${tc.question}`);
+
+    try {
+      const chunks = await withRetry(() => retrieveRelevantChunks(tc.question), "retrieval");
+
+      console.table(
+        chunks.map((c) => ({
+          file: c.sourceFile,
+          heading: c.heading,
+          similarity: c.similarity.toFixed(3),
+        }))
+      );
+
+      const result = await withRetry(() => generateAnswer(tc.question, chunks), "generation");
+
+      const topScore = chunks.length > 0 ? chunks[0].similarity.toFixed(3) : "n/a";
+      const gotSources = result.sources.map((s) => s.sourceFile).join(", ") || "none";
+
+      results.push({
+        id: tc.id,
+        tier: tc.tier,
+        question: tc.question,
+        expectedSource: tc.expectedSource ?? "(should refuse)",
+        topScore,
+        gotSources,
+        answer: result.answer,
+      });
+
+      console.log(`  top score: ${topScore} | sources: ${gotSources}`);
+      console.log(`  answer: ${result.answer}`);
+    } catch (err: any) {
+      const message = err?.message ?? String(err);
+      console.log(`  FAILED after ${MAX_RETRIES} retries: ${message}`);
+
+      results.push({
+        id: tc.id,
+        tier: tc.tier,
+        question: tc.question,
+        expectedSource: tc.expectedSource ?? "(should refuse)",
+        topScore: "ERROR",
+        gotSources: "ERROR",
+        answer: `[FAILED: ${message}]`,
+      });
+    }
+
+    await new Promise((r) => setTimeout(r, DELAY_MS));
+  }
+
+  console.log("\n\n===== FULL REPORT =====\n");
+  console.table(
+    results.map((r) => ({
+      id: r.id,
+      tier: r.tier,
+      expected: r.expectedSource,
+      topScore: r.topScore,
+      gotSources: r.gotSources,
+    }))
+  );
+
+  console.log("\n===== FULL ANSWERS (for manual/Claude review) =====\n");
+  for (const r of results) {
+    console.log(`#${r.id} [${r.tier}] ${r.question}`);
+    console.log(`  Expected: ${r.expectedSource}`);
+    console.log(`  Got sources: ${r.gotSources}`);
+    console.log(`  Answer: ${r.answer}`);
+    console.log("");
+  }
+
+  const failedCount = results.filter((r) => r.topScore === "ERROR").length;
+  if (failedCount > 0) {
+    console.log(`\n⚠ ${failedCount} question(s) failed even after ${MAX_RETRIES} retries — see ERROR entries above.`);
+  }
+
+  await pool.end();
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

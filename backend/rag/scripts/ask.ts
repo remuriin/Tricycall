@@ -11,6 +11,14 @@ async function main() {
   }
 
   const chunks = await retrieveRelevantChunks(question);
+  console.table(
+    chunks.map((c) => ({
+      file: c.sourceFile,
+      heading: c.heading,
+      similarity: c.similarity.toFixed(3),
+    }))
+  );
+
   const result = await generateAnswer(question, chunks);
 
   console.log("\nAnswer:\n" + result.answer);
