@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import type { RetrievedChunk, RagAnswer } from "../types/index.js";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-const CHAT_MODEL = "gemini-2.5-flash";
+const CHAT_MODEL = "gemini-3.8-flash";
 
 const SIMILARITY_FLOOR = 0.65;
 

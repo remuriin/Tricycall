@@ -1,1 +1,0 @@
-placeholder lng para ma push sa github yung folder

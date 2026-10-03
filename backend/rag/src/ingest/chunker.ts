@@ -13,6 +13,9 @@ export function chunkMarkdownFile(filePath: string, sourceFile: string): DocChun
   for (const section of sections) {
     const pieces = splitIfTooLong(section.content, MAX_CHARS);
     for (const piece of pieces) {
+      const trimmed = piece.trim();
+      if (!trimmed) continue; // skip empty/whitespace-only chunks
+      
       chunks.push({
         id: `${sourceFile}-${idx++}`,
         sourceFile,
