@@ -40,7 +40,25 @@ const testCases: TestCase[] = [
   { id: 20, tier: "refusal", question: "how do I cancel my Grab ride" },
   { id: 21, tier: "refusal", question: "what's the capital of the Philippines" },
   { id: 22, tier: "refusal", question: "can I bring a pet on the tricycle" },
-  { id: 23, tier: "refusal", question: "does Tricycall operate in Cebu" },
+  { id: 23, tier: "direct", question: "does Tricycall operate in Cebu", expectedSource: "service-areas.md" },
+  { id: 24, tier: "refusal", question: "is Tricycall cheaper than Angkas?" },
+
+  // Expansion: service-areas, booking-a-ride, ratings, wallet-and-account
+  { id: 25, tier: "direct", question: "Which areas does Tricycall serve?", expectedSource: "service-areas.md" },
+  { id: 26, tier: "direct", question: "How do I book a ride?", expectedSource: "booking-a-ride.md" },
+  { id: 27, tier: "direct", question: "How many passengers can ride in one tricycle?", expectedSource: "booking-a-ride.md" },
+  { id: 28, tier: "direct", question: "How do I rate my driver?", expectedSource: "ratings.md" },
+  { id: 29, tier: "direct", question: "How do I link my GCash?", expectedSource: "wallet-and-account.md" },
+  { id: 30, tier: "direct", question: "When do drivers get paid?", expectedSource: "wallet-and-account.md" },
+  { id: 31, tier: "paraphrased", question: "no driver is accepting my ride, what now", expectedSource: "booking-a-ride.md" },
+  { id: 32, tier: "paraphrased", question: "my driver rated me badly and i think its unfair", expectedSource: "ratings.md" },
+  { id: 33, tier: "paraphrased", question: "can i withdraw my wallet balance as cash", expectedSource: "wallet-and-account.md" },
+  { id: 34, tier: "cross-document", question: "im a student, how do i get my discount when booking", expectedSource: "wallet-and-account.md" },
+  { id: 35, tier: "cross-document", question: "can a driver with a Santa Lucia permit accept rides in San Roque", expectedSource: "service-areas.md" },
+  { id: 36, tier: "refusal", question: "can i book a ride for my friend" },
+  { id: 37, tier: "refusal", question: "can i tip my driver" },
+  { id: 38, tier: "refusal", question: "can i pay with apple pay" },
+  { id: 39, tier: "refusal", question: "can i book a tricycle for tomorrow morning" },
 ];
 
 const DELAY_MS = 3000; // pause between questions, free-tier RPM safety margin
@@ -79,7 +97,7 @@ async function main() {
   }[] = [];
 
   for (const tc of testCases) {
-    console.log(`\n[${tc.id}/23] (${tc.tier}) ${tc.question}`);
+    console.log(`\n[${tc.id}/${testCases.length}] (${tc.tier}) ${tc.question}`);
 
     try {
       const chunks = await withRetry(() => retrieveRelevantChunks(tc.question), "retrieval");
@@ -111,7 +129,7 @@ async function main() {
       console.log(`  answer: ${result.answer}`);
     } catch (err: any) {
       const message = err?.message ?? String(err);
-      console.log(`  FAILED after ${MAX_RETRIES} retries: ${message}`);
+      console.log(`  FAILED: ${message}`);
 
       results.push({
         id: tc.id,

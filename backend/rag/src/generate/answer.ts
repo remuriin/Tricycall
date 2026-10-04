@@ -17,8 +17,7 @@ export async function generateAnswer(
 
   if (usable.length === 0) {
     return {
-      answer:
-        "I don't have information about that in Tricycall's docs yet. Try asking something about fares, cancellations, safety, or driver verification.",
+      answer: "I don't have info on that yet. I can help with fares, booking, cancellations, safety, ratings, your wallet and account, and driver verification.",
       sources: [],
     };
   }
@@ -33,6 +32,7 @@ export async function generateAnswer(
     - Never say "the context," "the provided information," "the documents," or anything implying you were handed material to read from. Just answer as if you know it.
     - If something isn't covered, say so plainly and naturally, e.g. "I don't have that info yet" or "That's not something I can confirm right now".
     - If the question names a different company, app, or service (e.g. Grab, Uber, Angkas), start by saying you can only help with Tricycall, e.g. "I can only help with Tricycall, so I can't speak to Grab." Then, if relevant, offer the Tricycall equivalent.
+    - When asked whether something is possible or allowed (for example "can I book for a friend?" or "can I tip my driver?"), answer yes or no only if the information above says so directly. If it doesn't, say you can't confirm it. Never combine separate pieces of information to suggest a feature exists.
     - Be concise and direct, like a real support reply, not a research summary.
 
     Information:
