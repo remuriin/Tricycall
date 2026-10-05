@@ -1,0 +1,54 @@
+.book-ride-panel {
+  padding: 24px;
+  flex: 0 0 30%;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+}
+
+.book-ride-panel h2 {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.book-ride-panel .form-group {
+  margin-bottom: 16px;
+}
+
+.book-ride-panel .form-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.book-ride-panel .form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.book-ride-panel .fare-estimate {
+  font-size: 0.9rem;
+  margin: 8px 0 16px 0;
+  color: #333;
+}
+
+.book-ride-panel .book-ride-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #ccc;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.book-ride-panel .book-ride-btn:hover {
+  background-color: #bbb;
+}
+

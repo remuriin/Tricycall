@@ -1,8 +1,7 @@
 import { Outlet, NavLink } from "react-router-dom";
-import "./PassengerLayoutHeader.css";
-import SidePanel from '../features/passenger/components/SidePanel'
+import "./PassengerHeaderWithSidePanel.css";
 
-const PassengerLayoutHeader = () => {
+const PassengerHeaderWithSidePanel = () => {
   return (
     <div className="passenger-layout">
       <header className="header">
@@ -15,13 +14,11 @@ const PassengerLayoutHeader = () => {
       </header>
       <div className="content">
         <main className="outlet-box">
-          <h3>dito papasok yung passenger pages (depende sa feature)</h3>
           <Outlet />
         </main>
-        <SidePanel />
       </div>
     </div>
   );
 };
 
-export default PassengerLayoutHeader;
+export default PassengerHeaderWithSidePanel;

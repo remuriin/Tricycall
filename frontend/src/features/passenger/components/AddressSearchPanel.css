@@ -1,0 +1,70 @@
+.address-search-panel {
+  padding: 24px;
+  flex: 0 0 30%;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+}
+
+.address-search-panel .back-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.address-search-panel .search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.address-search-panel .section-title {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.05em;
+  margin: 12px 0 12px 0;
+  font-weight: 400;
+}
+
+.address-search-panel .option-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.address-search-panel .option-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.address-search-panel .option-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.address-search-panel .option-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.address-search-panel .option-address {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.address-search-panel hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0;
+}
+

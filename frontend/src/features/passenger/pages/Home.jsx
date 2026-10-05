@@ -1,8 +1,14 @@
+import BookRidePanel from "../components/BookRidePanel";
+import "./Home.css";
+
 const Home = () => {
   return (
-    <>
-      <h1>this is home</h1>
-    </>
+    <div className="home-page">
+      <div className="map-view">
+        <span>MAP VIEW</span>
+      </div>
+      <BookRidePanel />
+    </div>
   );
 };
 

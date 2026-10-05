@@ -4,14 +4,14 @@ import "./LoginSignUp.css";
 const LoginSignUp = () => {
   return (
     <>
-      <div className = "auth-page">
+      <div className="auth-page">
         <h1>welocm to login hashhsas</h1>
-        <button>
-          <NavLink to = "/passenger">login as passenger</NavLink>
-        </button>
-        <button>
-          <NavLink to = "/driver">login as driver</NavLink>
-        </button>
+        <NavLink to="/passenger" className="btn">
+          Login as passenger
+        </NavLink>
+        <NavLink to="/driver" className="btn">
+          Login as driver
+        </NavLink>
       </div>
     </>
   );

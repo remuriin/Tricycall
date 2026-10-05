@@ -1,0 +1,66 @@
+.payment-method-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #1a1a1a;
+}
+
+.payment-method-card {
+  background-color: #fff;
+  padding: 32px;
+  width: 400px;
+  box-sizing: border-box;
+}
+
+.payment-method-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.payment-method-subtitle {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+}
+
+.payment-method-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.payment-method-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+}
+
+.payment-method-fare {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 20px 0;
+}
+
+.payment-method-confirm-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #ccc;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.payment-method-confirm-btn:hover {
+  background-color: #bbb;
+}
+
