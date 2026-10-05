@@ -1,0 +1,68 @@
+.live-tracking-panel {
+  padding: 24px;
+  flex: 0 0 30%;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+}
+
+.live-tracking-panel h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.live-tracking-panel .eta {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.live-tracking-panel .driver-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+}
+
+.live-tracking-panel .driver-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  flex-shrink: 0;
+}
+
+.live-tracking-panel .driver-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.live-tracking-panel .driver-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.live-tracking-panel .driver-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.live-tracking-panel .cancel-ride-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #fff;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.live-tracking-panel .cancel-ride-btn:hover {
+  background-color: #f5f5f5;
+}
+

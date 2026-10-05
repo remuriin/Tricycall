@@ -1,0 +1,87 @@
+.no-drivers-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+.no-drivers-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.no-drivers-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 40px;
+}
+
+.no-drivers-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.no-drivers-content h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.no-drivers-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin: 0 0 32px 0;
+  max-width: 400px;
+}
+
+.no-drivers-try-btn {
+  width: 400px;
+  padding: 14px;
+  background-color: #ccc;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.no-drivers-cancel-btn {
+  width: 400px;
+  padding: 14px;
+  background-color: #fff;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.no-drivers-try-btn:hover {
+  background-color: #bbb;
+}
+
+.no-drivers-cancel-btn:hover {
+  background-color: #f5f5f5;
+}
+

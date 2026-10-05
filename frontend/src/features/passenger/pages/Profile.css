@@ -1,0 +1,36 @@
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+
+  width: 40%;
+
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.profile-box h3,
+.profile-box h4,
+.profile-box p {
+  margin: 0px;
+  text-align: center;
+}
+
+.options-box {
+  margin-top: 60px;
+}
+
+.nav-link-item {
+  color: black;
+  text-decoration: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 15px;
+}
+
+/* .nav-link-item.active { */
+  /* color: black; */
+  /* font-weight: regular; */
+/* } */

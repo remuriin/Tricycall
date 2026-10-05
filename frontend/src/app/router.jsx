@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import PassengerLayout from "../layouts/PassengerLayoutHeader";
+import PassengerHeader from "../layouts/PassengerHeader";
+import PassengerHeaderWithSidePanel from "../layouts/PassengerHeaderWithSidePanel";
 import DriverLayout from "../layouts/DriverLayoutHeader";
 
 import Auth from "../features/auth/pages/LoginSignUp";
@@ -49,25 +50,27 @@ export const router = createBrowserRouter([
     path: "/passenger",
     children: [
       {
-        element: <PassengerLayout />,
+        element: <PassengerHeaderWithSidePanel />,
         children: [
           { index: true, element: <Navigate to="home" replace /> },
           { path: "home", element: <PassengerHome /> },
-          { path: "my-rides", element: <PassengerMyRides /> },
-          { path: "profile", element: <PassengerProfile /> },
+          { path: "address-search", element: <PassengerAddressSearch /> },
+          { path: "finding-driver", element: <PassengerFindingDriver /> },
         ],
       },
       {
+        element: <PassengerHeader />,
         children: [
-          { path: "finding-driver", element: <PassengerFindingDriver /> },
-          { path: "cancel-ride", element: <PassengerCancelRideConfirm /> },
-          { path: "address-search", element: <PassengerAddressSearch /> },
-          { path: "no-drivers-found", element: <PassengerNoDriversFound /> },
-          { path: "payment", element: <PassengerPaymentMethod /> },
+          { path: "my-rides", element: <PassengerMyRides /> },
+          { path: "profile", element: <PassengerProfile /> },
           { path: "trip-complete", element: <PassengerTripComplete /> },
           { path: "safety", element: <PassengerSafety /> },
-        ]
+        ],
       },
+      // pages with no header
+      { path: "cancel-ride", element: <PassengerCancelRideConfirm /> },
+      { path: "no-drivers-found", element: <PassengerNoDriversFound /> },
+      { path: "payment", element: <PassengerPaymentMethod /> },
     ],
   },
   {

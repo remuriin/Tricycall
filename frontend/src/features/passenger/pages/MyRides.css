@@ -1,0 +1,47 @@
+.my-rides-page {
+  padding: 24px 32px;
+  max-width: 600px;
+}
+
+.my-rides-page h2 {
+  margin: 0 0 24px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.my-rides-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.my-rides-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-rides-date {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.my-rides-route {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.my-rides-fare {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.my-rides-status {
+  font-size: 0.85rem;
+  color: #888;
+}
+
