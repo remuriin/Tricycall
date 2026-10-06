@@ -1,0 +1,104 @@
+.earnings-page {
+  padding: 24px 32px;
+  max-width: 600px;
+}
+
+.earnings-summary {
+  border: 1px solid #333;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.earnings-summary h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.earnings-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.earnings-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.earnings-amount {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.earnings-section-title {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  margin: 24px 0 12px 0;
+}
+
+.earnings-trip-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+
+.earnings-trip-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.earnings-trip-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.earnings-trip-route {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.earnings-trip-fare {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.earnings-payout-method {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.earnings-change-btn {
+  background: none;
+  border: 1px solid #333;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.earnings-cashout-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #ccc;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.earnings-cashout-btn:hover {
+  background-color: #bbb;
+}
+

@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import PassengerHeader from "../layouts/PassengerHeader";
 import PassengerHeaderWithSidePanel from "../layouts/PassengerHeaderWithSidePanel";
-import DriverLayout from "../layouts/DriverLayoutHeader";
+import DriverHeader from "../layouts/DriverHeader";
+import DriverHeaderWithSidePanel from "../layouts/DriverHeaderWithSidePanel";
 
 import Auth from "../features/auth/pages/LoginSignUp";
 
@@ -77,23 +78,29 @@ export const router = createBrowserRouter([
     path: "/driver",
     children: [
       {
-        element: <DriverLayout />,
+        element: <DriverHeaderWithSidePanel />,
         children: [
           { index: true, element: <Navigate to="home" replace /> },
           { path: "home", element: <DriverHome /> },
           { path: "incoming-ride-request", element: <IncomingRideRequest /> },
           { path: "arrived-at-pickup", element: <ArrivedAtPickup /> },
           { path: "trip-in-progress", element: <TripInProgress /> },
-          { path: "ride-request-expired", element: <RideRequestExpired /> },
-          { path: "cancel-ride", element: <DriverCancelRideConfirm /> },
-          { path: "profile", element: <DriverProfile /> },
-          { path: "safety", element: <DriverSafety /> },
+        ],
+      },
+      {
+        element: <DriverHeader />,
+        children: [
           { path: "earnings-payout", element: <EarningsPayout /> },
           { path: "ride-history", element: <RideHistory /> },
-          { path: "sign-up-documents", element: <SignUpDocuments /> },
-          { path: "verification-pending", element: <VerificationPending /> },
+          { path: "profile", element: <DriverProfile /> },
+          { path: "safety", element: <DriverSafety /> },
         ],
-      }
+      },
+      // pages with no header
+      { path: "verification-pending", element: <VerificationPending /> },
+      { path: "ride-request-expired", element: <RideRequestExpired /> },
+      { path: "cancel-ride", element: <DriverCancelRideConfirm /> },
+      { path: "sign-up-documents", element: <SignUpDocuments /> },
     ]
   },
   {

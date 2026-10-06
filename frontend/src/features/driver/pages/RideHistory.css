@@ -1,0 +1,47 @@
+.driver-ride-history-page {
+  padding: 24px 32px;
+  max-width: 500px;
+}
+
+.driver-ride-history-page h2 {
+  margin: 0 0 24px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.driver-ride-history-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #333;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+
+.driver-ride-history-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-ride-history-date {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.driver-ride-history-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.driver-ride-history-route {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.driver-ride-history-fare {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+

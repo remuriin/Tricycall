@@ -1,0 +1,62 @@
+.driver-profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 32px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.driver-profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-bottom: 16px;
+}
+
+.driver-profile-name {
+  margin: 0 0 4px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.driver-profile-meta {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 32px 0;
+}
+
+.driver-profile-menu {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.driver-profile-menu-item {
+  display: block;
+  padding: 12px 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.driver-profile-menu hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0;
+}
+
+.driver-profile-logout-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #fff;
+  border: 1px solid #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.driver-profile-logout-btn:hover {
+  background-color: #f5f5f5;
+}
+

@@ -1,0 +1,70 @@
+.arrived-panel {
+  padding: 24px;
+  flex: 0 0 30%;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+}
+
+.arrived-panel h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.arrived-panel-subtitle {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0 0 20px 0;
+}
+
+.arrived-panel-card {
+  border: 1px solid #333;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.arrived-panel-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.arrived-panel-address {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.arrived-panel-call-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.arrived-panel-start-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ccc;
+  border: 1px solid #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.arrived-panel-call-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.arrived-panel-start-btn:hover {
+  background-color: #bbb;
+}
+

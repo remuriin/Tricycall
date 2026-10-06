@@ -1,8 +1,14 @@
+import DriverHomeSidePanel from "../components/DriverHomeSidePanel";
+import "./Home.css";
+
 const Home = () => {
   return (
-    <>
-      <h1>this is drivers home</h1>
-    </>
+    <div className="driver-home-page">
+      <div className="map-view">
+        <span>YOUR LOCATION</span>
+      </div>
+      <DriverHomeSidePanel />
+    </div>
   );
 };
 
