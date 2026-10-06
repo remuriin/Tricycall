@@ -1,0 +1,50 @@
+.driver-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.driver-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightblue;
+  padding: 12px 20px;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.driver-header h3 {
+  margin: 0;
+}
+
+.driver-profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  background-color: #ccc;
+}
+
+.driver-content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.driver-outlet-box {
+  background-color: orange;
+  flex: 1 1 0;
+  width: 70%;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+

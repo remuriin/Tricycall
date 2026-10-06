@@ -1,0 +1,51 @@
+.driver-home-panel {
+  padding: 24px;
+  flex: 0 0 30%;
+  width: 30%;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+}
+
+.driver-home-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.driver-home-toggle {
+  width: 48px;
+  height: 26px;
+  background-color: #4a90d9;
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+}
+
+.driver-home-toggle-knob {
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.driver-home-summary {
+  border: 1px solid #333;
+  padding: 16px;
+}
+
+.driver-home-summary h4 {
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.driver-home-summary p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+}
+
